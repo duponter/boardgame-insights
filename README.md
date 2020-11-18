@@ -1,0 +1,2 @@
+# boardgame-insights
+Boardgame Insights
