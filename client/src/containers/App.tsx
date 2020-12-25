@@ -3,6 +3,7 @@ import intl from 'react-intl-universal';
 import 'antd/dist/antd.css';
 import styles from './App.module.css';
 import {Col, Layout, Row} from 'antd';
+import {AppHeader} from '../components/Header/AppHeader';
 
 const {Header, Content} = Layout;
 
@@ -35,23 +36,11 @@ class App extends React.Component {
             this.state.initDone &&
             <Layout className={styles.AppHeader}>
                 <Header style={{backgroundColor: 'azure'}}>
-                    <Row>
-                        <Col xl={6}>
-                        </Col>
-                        <Col xs={16} xl={12} className={styles.right}>
-                            {intl.get('header.navigation')}
-                        </Col>
-                        <Col xs={8} xl={4} className={styles.right}>
-                            User
-                        </Col>
-                        <Col xl={2}>
-                        </Col>
-                    </Row>
+                    <AppHeader />
                 </Header>
                 <Content>
                     <Row>
-                        <Col xs={1} xl={3}>
-                        </Col>
+                        <Col xs={1} xl={3}/>
                         <Col xs={22} xl={18}>
                             <p>
                                 Edit <code>src/App.tsx</code> and save to reload.
@@ -65,8 +54,7 @@ class App extends React.Component {
                                 Learn React
                             </a>
                         </Col>
-                        <Col xs={1} xl={3} style={{border: '1px black solid'}}>
-                        </Col>
+                        <Col xs={1} xl={3} style={{border: '1px black solid'}}/>
                     </Row>
                 </Content>
             </Layout>
