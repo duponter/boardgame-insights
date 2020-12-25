@@ -1,5 +1,20 @@
 {
   "header": {
-    "navigation": "Menus (nested)"
+    "navigation": "Navigation comes here"
+  },
+  "status": {
+    "user": {
+      "loggedin": {
+        "link": {
+          "tooltip": "View your profile page on BoardGameGeek"
+        }
+      },
+      "anonymous": {
+        "ribbon": "anonymous",
+        "link": {
+          "tooltip": "Sign in with BoardGameGeek"
+        }
+      }
+    }
   }
 }
