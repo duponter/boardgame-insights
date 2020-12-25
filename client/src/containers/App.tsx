@@ -36,23 +36,23 @@ class App extends React.Component {
             <Layout className={styles.AppHeader}>
                 <Header style={{backgroundColor: 'azure'}}>
                     <Row>
-                        <Col xs={24} xl={6}>
+                        <Col xl={6}>
                         </Col>
-                        <Col xs={24} xl={12} className={styles.right}>
+                        <Col xs={16} xl={12} className={styles.right}>
                             {intl.get('header.navigation')}
                         </Col>
-                        <Col xs={24} xl={4} className={styles.right}>
+                        <Col xs={8} xl={4} className={styles.right}>
                             User
                         </Col>
-                        <Col xs={24} xl={2}>
+                        <Col xl={2}>
                         </Col>
                     </Row>
                 </Header>
                 <Content>
                     <Row>
-                        <Col xs={24} xl={3}>
+                        <Col xs={1} xl={3}>
                         </Col>
-                        <Col xs={24} xl={18}>
+                        <Col xs={22} xl={18}>
                             <p>
                                 Edit <code>src/App.tsx</code> and save to reload.
                             </p>
@@ -65,7 +65,7 @@ class App extends React.Component {
                                 Learn React
                             </a>
                         </Col>
-                        <Col xs={24} xl={3} style={{border: '1px black solid'}}>
+                        <Col xs={1} xl={3} style={{border: '1px black solid'}}>
                         </Col>
                     </Row>
                 </Content>
