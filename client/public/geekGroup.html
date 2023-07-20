@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="https://geekgroup.app/static/favicon-32x32.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="theme-color" content="#000000"/>
+    <meta name="description" content="geekGroup URL creator"/>
+    <title>geekGroup URL creator</title>
+    <style>
+        .header {
+            grid-area: header;
+        }
+
+        .left {
+            grid-area: left;
+        }
+
+        .main {
+            grid-area: main;
+        }
+
+        .right {
+            grid-area: right;
+        }
+
+        .footer {
+            grid-area: footer;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-areas:
+    'header header header header header header'
+    'left main main main main right'
+    'footer footer footer footer footer footer';
+            background-color: #3395b5;
+            padding: 10px;
+        }
+
+        .grid-container > div {
+            background-color: #FFFFFF;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 20px;
+        }
+
+        .grid-container > div.header {
+            background-color: #024359;
+            color: #FFFFFF;
+        }
+
+        input[type=submit] {
+            background-color: #024359;
+            color: #FFFFFF;
+        }
+
+        input[type=reset] {
+            background-color: #FFFFFF;
+            color: #024359;
+        }
+
+        legend {
+            color: #024359;
+        }
+
+        .geekgroup > h1 {
+            background-color: #024359;
+        }
+
+        .geekgroup > h2 {
+            background-color: #046c8f;
+        }
+
+        .geekgroup > h3 {
+            background-color: #2c84a0;
+        }
+
+        .geekgroup > h4 {
+            background-color: #3395b5;
+        }
+    </style>
+    <script type="application/javascript">
+        function onFormSubmit(event) {
+            event.preventDefault();
+            const data = new FormData(event.target);
+
+            const params = new URLSearchParams();
+            const owners = data.getAll('owners');
+            if (owners.length > 0) {
+                params.append('owners', owners.join(','));
+            }
+            const count = data.get('count');
+            params.append(`${data.get('count.type')}`, count + ',' + count);
+            params.append('sort', 'rating.bgg');
+            params.append('sortReverse', '1');
+
+            const url = `https://geekgroup.app/${data.get('group')}/collection?${params.toString()}`;
+            console.log(url);
+            window.open(url, '_blank');
+        }
+
+        function onBodyLoad() {
+            document.getElementById("geekGroupQuery").addEventListener("submit", onFormSubmit);
+        }
+    </script>
+</head>
+<body onload="onBodyLoad()">
+<noscript>You need to enable JavaScript to run this app.</noscript>
+<div class="grid-container">
+    <div class="header"><h3>geekGroup URL creator</h3></div>
+    <div class="left"></div>
+    <div class="main">
+        <form id="geekGroupQuery" action="#" method="get">
+            <fieldset>
+                <legend>Groups</legend>
+                <input type="radio" id="group.mine" name="group" value="users/duponter">
+                <label for="group.mine">Me</label>
+                <input type="radio" id="group.fmlimited" name="group" value="groups/mtbfyeoo" checked>
+                <label for="group.fmlimited">Forum Mortsel Ltd</label>
+                <input type="radio" id="group.bareelstraat" name="group" value="groups/rj3inmzx">
+                <label for="group.bareelstraat">Bareelstraat</label>
+                <input type="radio" id="group.schelle" name="group" value="groups/jtwnazav">
+                <label for="group.schelle">Schelle</label>
+                <input type="radio" id="group.aca" name="group" value="groups/14btgurt">
+                <label for="group.aca">ACA</label>
+            </fieldset>
+            <fieldset>
+                <legend>Player Count</legend>
+                <fieldset>
+                    <legend>FM Limited Players</legend>
+                    <ul>
+                        <li>
+                            <input type="checkbox" id="player.erwin" name="owners" value="773962">
+                            <label for="player.erwin">Erwin</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="player.bart" name="owners" value="215156">
+                            <label for="player.bart">Bart</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="player.sven" name="owners" value="159953">
+                            <label for="player.sven">Sven</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="player.steffen" name="owners" value="562831">
+                            <label for="player.steffen">Steffen</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="player.didier" name="owners" value="54518">
+                            <label for="player.didier">Didier</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="player.edouard" name="owners" value="1852958">
+                            <label for="player.edouard">Edouard</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="player.dirk" name="owners" value="246302">
+                            <label for="player.dirk">Dirk</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="player.jeroen" name="owners" value="2078971">
+                            <label for="player.jeroen">Jeroen</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="player.michael" name="owners" value="231861">
+                            <label for="player.michael">Michaël</label>
+                        </li>
+                    </ul>
+                </fieldset>
+                OR
+                <fieldset>
+                    <legend>Count</legend>
+                    <input type="number" id="playercount" name="count" value="3" min="1" max="6" step="1">
+                    <label for="playercount">Player count</label>
+                    <input type="radio" id="count.type.best" name="count.type" value="count.best" checked>
+                    <label for="count.type.best">Best</label>
+                    <input type="radio" id="count.type.recommended" name="count.type" value="count.recommended">
+                    <label for="count.type.recommended">Recommended</label>
+                </fieldset>
+            </fieldset>
+            <input type="submit" value="Go">
+            <input type="reset" value="Reset">
+        </form>
+    </div>
+    <div class="right"></div>
+    <div class="footer"><small>&copy; 2023 duponter</small></div>
+</div>
+</body>
+</html>
