@@ -50,6 +50,72 @@
             color: #FFFFFF;
         }
 
+        .section {
+            margin: 5px 10px 10px;
+        }
+
+        legend {
+            color: #024359;
+        }
+
+        ul.checkbox {
+            list-style: none;
+
+            -webkit-columns: 3 200px;
+            -moz-columns: 3 200px;
+            columns: 3 200px;
+            -webkit-column-gap: 4em;
+            -moz-column-gap: 4em;
+            column-gap: 4em;
+        }
+
+        ul.checkbox li {
+            display: inline-block;
+            text-align: left;
+            width: 12em;
+        }
+
+        ul.checkbox li input {
+            margin-right: .25em;
+        }
+
+
+        ul.checkbox li label {
+            /*margin-left: unset;*/
+        }
+
+        button {
+            background-color: #3395b5;
+            color: #FFFFFF;
+        }
+
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        .buttongroup-wrapper {
+            width: 40%;
+            margin-left: 30%;
+            display: flex;
+        }
+
+        .buttongroup {
+            display: unset;
+            width: 100%;
+        }
+
+        .buttongroup > input {
+            width: 15%;
+        }
+
         input[type=submit] {
             background-color: #024359;
             color: #FFFFFF;
@@ -57,10 +123,6 @@
 
         input[type=reset] {
             background-color: #FFFFFF;
-            color: #024359;
-        }
-
-        legend {
             color: #024359;
         }
 
@@ -81,7 +143,7 @@
         }
     </style>
     <script type="application/javascript">
-        function onFormSubmit(event) {
+        const onFormSubmit = (event) => {
             event.preventDefault();
             const data = new FormData(event.target);
 
@@ -100,8 +162,37 @@
             window.open(url, '_blank');
         }
 
-        function onBodyLoad() {
-            document.getElementById("geekGroupQuery").addEventListener("submit", onFormSubmit);
+        const onFmdLtdChange = (event) => {
+            document.querySelector('ul.checkbox').disabled = !event.target.checked;
+        }
+
+        const initFmdLtdCheckbox = () => {
+            const fmLtd = document.getElementById('group.fmlimited');
+            // document.getElementById('owners').forEach(el => el.disabled = !fmLtd.checked);
+            // fmLtd.addEventListener('change', onFmdLtdChange);
+        }
+
+        const increment = (event) => {
+            event.preventDefault();
+            const counter = document.getElementById('playercount');
+            counter.value = Number(counter.value) + 1;
+            document.querySelector('.spinner.increment').disabled = (Number(counter.value) === 6);
+            document.querySelector('.spinner.decrement').disabled = false;
+        }
+
+        const decrement = (event) => {
+            event.preventDefault();
+            const counter = document.getElementById('playercount');
+            counter.value = Number(counter.value) - 1;
+            document.querySelector('.spinner.decrement').disabled = (Number(counter.value) === 1);
+            document.querySelector('.spinner.increment').disabled = false;
+        }
+
+        const onBodyLoad = () => {
+            // initFmdLtdCheckbox();
+            document.getElementById('geekGroupQuery').addEventListener('submit', onFormSubmit);
+            document.querySelector('.spinner.increment').addEventListener('click', increment)
+            document.querySelector('.spinner.decrement').addEventListener('click', decrement)
         }
     </script>
 </head>
@@ -112,24 +203,35 @@
     <div class="left"></div>
     <div class="main">
         <form id="geekGroupQuery" action="#" method="get">
-            <fieldset>
+            <fieldset class="section">
                 <legend>Groups</legend>
-                <input type="radio" id="group.mine" name="group" value="users/duponter">
-                <label for="group.mine">Me</label>
-                <input type="radio" id="group.fmlimited" name="group" value="groups/mtbfyeoo" checked>
-                <label for="group.fmlimited">Forum Mortsel Ltd</label>
-                <input type="radio" id="group.bareelstraat" name="group" value="groups/rj3inmzx">
-                <label for="group.bareelstraat">Bareelstraat</label>
-                <input type="radio" id="group.schelle" name="group" value="groups/jtwnazav">
-                <label for="group.schelle">Schelle</label>
-                <input type="radio" id="group.aca" name="group" value="groups/14btgurt">
-                <label for="group.aca">ACA</label>
+                <ul class="checkbox">
+                    <li>
+                        <input type="radio" id="group.mine" name="group" value="users/duponter">
+                        <label for="group.mine">Me</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="group.fmlimited" name="group" value="groups/mtbfyeoo" checked>
+                        <label for="group.fmlimited">Forum Mortsel Ltd</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="group.bareelstraat" name="group" value="groups/rj3inmzx">
+                        <label for="group.bareelstraat">Bareelstraat</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="group.schelle" name="group" value="groups/jtwnazav">
+                        <label for="group.schelle">Schelle</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="group.aca" name="group" value="groups/14btgurt">
+                        <label for="group.aca">ACA</label>
+                    </li>
+                </ul>
             </fieldset>
-            <fieldset>
+            <fieldset class="section">
                 <legend>Player Count</legend>
-                <fieldset>
-                    <legend>FM Limited Players</legend>
-                    <ul>
+                <div>
+                    <ul class="checkbox">
                         <li>
                             <input type="checkbox" id="player.erwin" name="owners" value="773962">
                             <label for="player.erwin">Erwin</label>
@@ -167,20 +269,24 @@
                             <label for="player.michael">Michaël</label>
                         </li>
                     </ul>
-                </fieldset>
-                OR
-                <fieldset>
-                    <legend>Count</legend>
-                    <input type="number" id="playercount" name="count" value="3" min="1" max="6" step="1">
-                    <label for="playercount">Player count</label>
-                    <input type="radio" id="count.type.best" name="count.type" value="count.best" checked>
-                    <label for="count.type.best">Best</label>
-                    <input type="radio" id="count.type.recommended" name="count.type" value="count.recommended">
-                    <label for="count.type.recommended">Recommended</label>
-                </fieldset>
+                    <div class="number-input">
+                        <input type="radio" id="count.type.best" name="count.type" value="count.best" checked>
+                        <label for="count.type.best">Best</label>
+                        <input type="radio" id="count.type.recommended" name="count.type" value="count.recommended">
+                        <label for="count.type.recommended">Recommended</label>
+                        <label for="playercount">with</label>
+                        <button name="count.decrement" class="spinner decrement">-</button>
+                        <input type="number" id="playercount" name="count" value="3" min="1" max="6" step="1">
+                        <button name="count.increment" class="spinner increment">+</button>
+                    </div>
+                </div>
             </fieldset>
-            <input type="submit" value="Go">
-            <input type="reset" value="Reset">
+            <div class="buttongroup-wrapper">
+                <div class="buttongroup">
+                    <input type="submit" value="Go">
+                    <input type="reset" value="Reset">
+                </div>
+            </div>
         </form>
     </div>
     <div class="right"></div>
